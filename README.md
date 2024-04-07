@@ -96,5 +96,13 @@ This README provides guidance on deploying the architecture consisting of an ECS
 - Minimalistic Access Requirements: The security configurations prioritize security by granting minimum required access between components.
 - Familiarity with AWS: Users deploying this architecture are assumed to have a basic understanding of AWS services and Terraform.
 
+## Security Best Practices Implemented:
+
+- **Least Privilege**: Security groups are configured to allow only necessary inbound and outbound traffic, following the principle of least privilege.
+- **Multi-AZ Deployment**: RDS instances are deployed across multiple availability zones (AZs) for enhanced fault tolerance and reliability.
+- **Automated Backups**: Automated backups are enabled for RDS instances to ensure data durability and facilitate point-in-time recovery.
+- **Read Replica**: Read replicas are implemented to offload read-heavy workloads and improve database performance.
+- **ECS on Fargate**: ECS tasks are orchestrated using Fargate, a serverless compute engine, reducing operational overhead and enhancing security.
+
 
 By following these deployment steps and design decisions, the architecture ensures a secure, scalable, and well-structured environment for deploying web applications on AWS using ECS.
