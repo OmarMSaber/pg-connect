@@ -57,10 +57,6 @@ This README provides guidance on deploying the architecture consisting of an ECS
 - Database Security Group: Permits PostgreSQL (port 5432) traffic from ECS Servers Security Group to facilitate communication between ECS tasks and the database.
 - ALB Security Group: Allows HTTP and HTTPS traffic from anywhere, ensuring accessibility to the ALB.
 
-### Auto-scaling:
-
-- Auto-scaling is enabled for ECS tasks to dynamically adjust task count based on CPU utilization, ensuring optimal resource utilization and performance.
-
 ### ECS on Fargate:
 
 - **Container Orchestration**: ECS on Fargate was chosen as the container orchestration platform due to its serverless nature, eliminating the need to manage underlying infrastructure and allowing focus on application development.
@@ -69,15 +65,19 @@ This README provides guidance on deploying the architecture consisting of an ECS
 - **Simplified Deployment**: By abstracting away the infrastructure layer, ECS on Fargate simplifies the deployment process, allowing rapid deployment and updates of containerized applications with minimal operational overhead.
 - **Integrated Networking**: Fargate integrates with AWS networking services, enabling seamless communication between containers and other AWS services while providing security through VPC isolation and security groups.
 
-### Automated Backup:
+### Auto-scaling:
+
+- Auto-scaling is enabled for ECS tasks to dynamically adjust task count based on CPU utilization, ensuring optimal resource utilization and performance.
+
+### RDS Automated Backup:
 
 - Automated backups are enabled for RDS instances to ensure data durability and facilitate point-in-time recovery in case of data loss or corruption.
 
-### Multi-AZ Deployment:
+### RDS Multi-AZ Deployment:
 
 - RDS instances are deployed across multiple availability zones (AZs) to enhance fault tolerance and ensure high availability of database services.
 
-### Read Replica:
+### RDS Read Replica:
 
 - Read replicas are configured for RDS instances to offload read-heavy workloads and improve database performance.
 
