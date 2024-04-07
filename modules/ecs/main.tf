@@ -69,6 +69,31 @@ resource "aws_cloudwatch_log_group" "ecs_logs" {
   retention_in_days = 14  # Optional: Set retention period for logs
 }
 
+resource "aws_appautoscaling_target" "ecs_service" {
+  max_capacity       = 4  # Maximum number of tasks, adjust as needed
+  min_capacity       = 1  # Minimum number of tasks
+  resource_id        = "service/${aws_ecs_cluster.main.name}/${aws_ecs_service.main.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}
+
+resource "aws_appautoscaling_policy" "ecs_service_scaling_policy" {
+  name               = "ecs-service-scaling-policy"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = aws_appautoscaling_target.ecs_service.resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_service.scalable_dimension
+  service_namespace  = "ecs"
+
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageCPUUtilization"
+    }
+    target_value       = 50   # Adjust the target CPU utilization percentage as needed
+    scale_in_cooldown  = 60  # The amount of time, in seconds, after a scale in activity completes before another scale in activity can start
+    scale_out_cooldown = 60  # The amount of time, in seconds, after a scale out activity completes before another scale out activity can start
+  }
+}
+
 resource "aws_ecs_service" "main" {
   name            = "my-ecs-service"
   cluster         = aws_ecs_cluster.main.arn
