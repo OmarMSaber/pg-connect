@@ -89,6 +89,7 @@ This README provides guidance on deploying the architecture consisting of an ECS
 - **AWS Shield and AWS WAF**: Enhance security by implementing AWS Shield for DDoS protection and AWS WAF for web application firewall.
 - **Cloud CDN**: Implement a content delivery network (CDN) for improved content delivery and performance optimization.
 - **Disaster Recovery Environment**: Set up a disaster recovery environment in another region with a less scaled version for business continuity and data redundancy.
+- **Encryption for Secrets**: Implement encryption for secrets and passwords using AWS Key Management Service (KMS) to ensure sensitive data is securely stored and managed.
 
 ## Assumptions:
 
